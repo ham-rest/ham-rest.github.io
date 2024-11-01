@@ -30,7 +30,7 @@ logo: "/assets/images/logo.png"
 heading_anchors: true
 color_scheme: dark
 
-footer_content: "Copyright &copy; 2024-2024 Mohammad Tahmasebi."
+footer_content: "Copyright &copy; 2024-2024 <a href=\"mailto:otahmasebii@gmail.com\">Mohammad Tahmasebi</a>."
 
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
@@ -45,7 +45,7 @@ gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into t
 
 nav_external_links:
   - title: Postman Collection
-    url: https://github.com/ham-rest/ham-rest.github.io/raw/main/Hamravesh.postman_collection.json
+    url: https://github.com/ham-rest/ham-rest.github.io/blob/main/Hamravesh.postman_collection.json
     hide_icon: false
     opens_in_new_tab: true
 

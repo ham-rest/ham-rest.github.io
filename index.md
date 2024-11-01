@@ -33,7 +33,7 @@ To begin using the Hamravesh API, follow these steps:
 
 1. **Register** for an account on the [Hamravesh dashboard](https://hamravesh.com).
 2. **Generate an API Key** in the user settings to authenticate your requests.
-3. **Review** the [Authentication Guide](#authentication) for more details on securely connecting to the API.
+3. **Review** the [Authentication Guide](/sections/base/auth) for more details on securely connecting to the API.
 4. **Explore** the endpoints and start building!
 
 ### Base URL
@@ -49,7 +49,7 @@ To help you get started, here’s a quick example of a simple API call:
 
 - **Method**: `GET`
 - **URL**: `/api/v1/users/profile`
-- **Authorization**: Bearer token required
+- **Authorization**: Api-key required
 
 {% tabs example-request %}
 
@@ -92,7 +92,7 @@ This documentation is organized to provide a clear and detailed understanding of
 
 ### Documentation Sections
 
-- [Basics](/sections/basics)  
+- [Get Started](/sections/start)  
 - [Namespase Management](/sections/namespaces)  
 - [Registry Management](/sections/registries)  
 - [Applications Management](/sections/apps)  
