@@ -92,10 +92,10 @@ This documentation is organized to provide a clear and detailed understanding of
 
 ### Documentation Sections
 
-- [Authentication](#authentication)  
-- [Applications Management](#applications-management)  
-- [Database Services](#database-services)  
-- [Networking and Configuration](#networking-and-configuration)  
-- [Monitoring and Analytics](#monitoring-and-analytics)  
-- [Error Codes and Troubleshooting](#error-codes-and-troubleshooting)  
-- [FAQ and Resources](#faq-and-resources)
+- [Basics](/sections/basics)  
+- [Namespase Management](/sections/namespaces)  
+- [Registry Management](/sections/registries)  
+- [Applications Management](/sections/apps)  
+- [Database Services](/sections/databases)  
+- [Monitoring and Analytics](/sections/monitoring)  
+- [FAQ and Resources](/extra/faq)

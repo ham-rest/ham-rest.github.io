@@ -1,0 +1,938 @@
+{
+	"info": {
+		"_postman_id": "e72cb322-83c5-477d-8d70-fd25e1bec5a1",
+		"name": "Hamravesh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "11344669"
+	},
+	"item": [
+		{
+			"name": "NameSpace",
+			"item": [
+				{
+					"name": "create namespace",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"namespace name\",\n    \"cluster_id\": {{cluster_id}}\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/namespaces/"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete NameSpace",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": "https://api.hamravesh.com/api/v1/darkube/namespaces/{{namespace_id}}/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registry",
+			"item": [
+				{
+					"name": "list of registries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": "https://api.hamravesh.com/api/v1/registry/"
+					},
+					"response": []
+				},
+				{
+					"name": "create registry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"registry name\",\n  \"address\": \"registry url\",\n  \"username\": \"registry username\",\n  \"password\": \"registry password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/registry/"
+					},
+					"response": []
+				},
+				{
+					"name": "delete registry",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": "https://api.hamravesh.com/api/v1/registry/{{registry_id}}/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "APP",
+			"item": [
+				{
+					"name": "1.plans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://api.hamravesh.com/api/v1/darkube/plans/"
+					},
+					"response": []
+				},
+				{
+					"name": "2.disks",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://api.hamravesh.com/api/v1/darkube/plans/disk/"
+					},
+					"response": []
+				},
+				{
+					"name": "3.plan calculator",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"plan\": \"55d2ce2b-d8aa-4aa4-a73a-7715053d398c\", // custom plan id\n  \"cpu\": \"200m\",\n  \"ram\": \"500M\",\n  \"replicas\": 1,\n  \"disk\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/plans/calculator/"
+					},
+					"response": []
+				},
+				{
+					"name": "4. create app",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"image_repo\": \"nginx\",\n  \"image_tag\": \"1.24\",\n  \"builder\": \"dockerfile\",\n  \"creation_method\": \"docker_image\",\n  \"name\": \"app name\",\n  \"svc\": {\n    \"type\": \"ClusterIP\",\n    \"ports\": {\n      \"main\": {\n        \"protocol\": \"TCP\",\n        \"servicePort\": 80,\n        \"containerPort\": 80\n      }\n    }\n  },\n  \"command\": \"\",\n  \"args\": \"\",\n  \"readiness_probe_path\": \"/\",\n  \"custom_config\": {},\n  \"plan\": \"55d2ce2b-d8aa-4aa4-a73a-7715053d398c\",\n  \"ram_limit\": \"250M\",\n  \"cpu_request\": \"250m\",\n  \"replicas\": 1,\n  \"namespace\": {{namespace_id}},\n  \"deploy_context\": null,\n  \"organization\": {{organization_id}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/"
+					},
+					"response": []
+				},
+				{
+					"name": "5. app info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/{{app_id}}/"
+					},
+					"response": []
+				},
+				{
+					"name": "6. app logs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/apps/{{app_id}}/app_log/?from_index=20000000&to_index=20000100&reference_index=0&pod_name=nginx2-db8f96668-4k675&container_name=main&previous=false",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"apps",
+								"{{app_id}}",
+								"app_log",
+								""
+							],
+							"query": [
+								{
+									"key": "from_index",
+									"value": "20000000"
+								},
+								{
+									"key": "to_index",
+									"value": "20000100"
+								},
+								{
+									"key": "reference_index",
+									"value": "0"
+								},
+								{
+									"key": "pod_name",
+									"value": "nginx2-db8f96668-4k675"
+								},
+								{
+									"key": "container_name",
+									"value": "main"
+								},
+								{
+									"key": "previous",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. cpu usage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/insights/proxy_new/api/v1/query_range?title=CPU+Usage&type=cpu_usage&app_id={{app_id}}&step_size=10&start_time=1730304016&end_time=1730307616&insight_type=cpu_usage&pod_name=*",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"insights",
+								"proxy_new",
+								"api",
+								"v1",
+								"query_range"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "CPU+Usage"
+								},
+								{
+									"key": "type",
+									"value": "cpu_usage"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "step_size",
+									"value": "10"
+								},
+								{
+									"key": "start_time",
+									"value": "1730304016"
+								},
+								{
+									"key": "end_time",
+									"value": "1730307616"
+								},
+								{
+									"key": "insight_type",
+									"value": "cpu_usage"
+								},
+								{
+									"key": "pod_name",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. ram usage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/insights/proxy_new/api/v1/query_range?title=RAM+Usage&type=ram_usage&app_id={{app_id}}&step_size=10&start_time=1730304016&end_time=1730307616&insight_type=ram_usage&pod_name=*",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"insights",
+								"proxy_new",
+								"api",
+								"v1",
+								"query_range"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "RAM+Usage"
+								},
+								{
+									"key": "type",
+									"value": "ram_usage"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "step_size",
+									"value": "10"
+								},
+								{
+									"key": "start_time",
+									"value": "1730304016"
+								},
+								{
+									"key": "end_time",
+									"value": "1730307616"
+								},
+								{
+									"key": "insight_type",
+									"value": "ram_usage"
+								},
+								{
+									"key": "pod_name",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. cpu throttling",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/insights/proxy_new/api/v1/query_range?title=CPU+Throttling&type=cpu_throttling&app_id={{app_id}}&step_size=10&start_time=1730304016&end_time=1730307616&insight_type=cpu_throttling&pod_name=*",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"insights",
+								"proxy_new",
+								"api",
+								"v1",
+								"query_range"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "CPU+Throttling"
+								},
+								{
+									"key": "type",
+									"value": "cpu_throttling"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "step_size",
+									"value": "10"
+								},
+								{
+									"key": "start_time",
+									"value": "1730304016"
+								},
+								{
+									"key": "end_time",
+									"value": "1730307616"
+								},
+								{
+									"key": "insight_type",
+									"value": "cpu_throttling"
+								},
+								{
+									"key": "pod_name",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10. network receive",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/insights/proxy_new/api/v1/query_range?title=Network+Receive&type=network_receive&app_id={{app_id}}&step_size=10&start_time=1730304016&end_time=1730307616&insight_type=network_receive&pod_name=*",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"insights",
+								"proxy_new",
+								"api",
+								"v1",
+								"query_range"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Network+Receive"
+								},
+								{
+									"key": "type",
+									"value": "network_receive"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "step_size",
+									"value": "10"
+								},
+								{
+									"key": "start_time",
+									"value": "1730304016"
+								},
+								{
+									"key": "end_time",
+									"value": "1730307616"
+								},
+								{
+									"key": "insight_type",
+									"value": "network_receive"
+								},
+								{
+									"key": "pod_name",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11. network send",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/insights/proxy_new/api/v1/query_range?title=Network+Send&type=network_send&app_id={{app_id}}&step_size=10&start_time=1730304016&end_time=1730307616&insight_type=network_send&pod_name=*",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"insights",
+								"proxy_new",
+								"api",
+								"v1",
+								"query_range"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Network+Send"
+								},
+								{
+									"key": "type",
+									"value": "network_send"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "step_size",
+									"value": "10"
+								},
+								{
+									"key": "start_time",
+									"value": "1730304016"
+								},
+								{
+									"key": "end_time",
+									"value": "1730307616"
+								},
+								{
+									"key": "insight_type",
+									"value": "network_send"
+								},
+								{
+									"key": "pod_name",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12. disk usage",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/insights/proxy_new/api/v1/query_range?title=Disk+Usage&type=disk_usage&app_id={{app_id}}&step_size=10&start_time=1730304016&end_time=1730307616&insight_type=disk_usage&pod_name=*",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"insights",
+								"proxy_new",
+								"api",
+								"v1",
+								"query_range"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "Disk+Usage"
+								},
+								{
+									"key": "type",
+									"value": "disk_usage"
+								},
+								{
+									"key": "app_id",
+									"value": "{{app_id}}"
+								},
+								{
+									"key": "step_size",
+									"value": "10"
+								},
+								{
+									"key": "start_time",
+									"value": "1730304016"
+								},
+								{
+									"key": "end_time",
+									"value": "1730307616"
+								},
+								{
+									"key": "insight_type",
+									"value": "disk_usage"
+								},
+								{
+									"key": "pod_name",
+									"value": "*"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13. list of apps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.hamravesh.com/api/v1/darkube/apps/?limit=400&offset=0&fields=id,namespace,cluster,state,name,creation_method,build_options,custom_domain_address,external_hosts,ram_limit,cpu_request,is_deployable,is_hpa_enbaled,is_enabled,replicas,custom_subdomain_addr,plan,template_fields,custom_config,custom_subdomain_addr,disk,enable_SSL,database_properties,latest_build",
+							"protocol": "https",
+							"host": [
+								"api",
+								"hamravesh",
+								"com"
+							],
+							"path": [
+								"api",
+								"v1",
+								"darkube",
+								"apps",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "400"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "fields",
+									"value": "id,namespace,cluster,state,name,creation_method,build_options,custom_domain_address,external_hosts,ram_limit,cpu_request,is_deployable,is_hpa_enbaled,is_enabled,replicas,custom_subdomain_addr,plan,template_fields,custom_config,custom_subdomain_addr,disk,enable_SSL,database_properties,latest_build"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "14. Delete APP",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/{{app_id}}/"
+					},
+					"response": []
+				},
+				{
+					"name": "15. Power OFF",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": [\n    \"is_enabled\"\n  ],\n  \"is_enabled\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/{{app_id}}/"
+					},
+					"response": []
+				},
+				{
+					"name": "16. Power ON",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fields\": [\n    \"is_enabled\"\n  ],\n  \"is_enabled\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/{{app_id}}/"
+					},
+					"response": []
+				},
+				{
+					"name": "17. add domain",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{app_id}}\",\n  \"cluster\": {\n    \"name\": \"sindad-c15\",\n    \"location_country\": \"IR\",\n    \"location_datacenter\": \"سینداد\",\n    \"id\": 53,\n    \"ingress_hostname_address\": \"c15.sindad.onhamravesh.ir\",\n    \"is_on_premise\": false,\n    \"apps_custom_base_domain\": \"darkube.app\",\n    \"outgoing_ip\": \"157.119.191.243\",\n    \"is_darkube_public_cluster\": true,\n    \"ingress_controller_type\": \"traefikv2\",\n    \"has_capacity_to_create_app\": true,\n    \"cluster_plan\": 1\n  },\n  \"plan\": \"73904144-6592-40ce-a96f-3789f611b5e4\",\n  \"namespace\": {\n    \"name\": \"{{namespace_name}}\",\n    \"cluster\": {\n      \"name\": \"sindad-c15\",\n      \"location_country\": \"IR\",\n      \"location_datacenter\": \"سینداد\",\n      \"id\": 53,\n      \"ingress_hostname_address\": \"c15.sindad.onhamravesh.ir\",\n      \"is_on_premise\": false,\n      \"apps_custom_base_domain\": \"darkube.app\",\n      \"outgoing_ip\": \"157.119.191.243\",\n      \"is_darkube_public_cluster\": true,\n      \"ingress_controller_type\": \"traefikv2\",\n      \"has_capacity_to_create_app\": true,\n      \"cluster_plan\": 1\n    },\n    \"id\": {{cluster_id}}\n  },\n  \"custom_config\": {},\n  \"template_fields\": [],\n  \"ingress_cname_address\": \"c15.sindad.onhamravesh.ir\",\n  \"svc\": {\n    \"type\": \"ClusterIP\",\n    \"ports\": {\n      \"main\": {\n        \"protocol\": \"TCP\",\n        \"servicePort\": 80,\n        \"containerPort\": 80\n      }\n    },\n    \"internalAddress\": \"nginx2.hittah75-odootest.svc\"\n  },\n  \"build_options\": {},\n  \"is_deployable\": true,\n  \"custom_domain_address\": null,\n  \"is_hpa_enabled\": false,\n  \"images_info\": {},\n  \"creator\": {\n    \"id\": {{account_id}},\n    \"first_name\": null,\n    \"last_name\": null,\n    \"full_name\": \"{{account_name}}\",\n    \"email\": \"{{account_email}}\",\n    \"is_email_verified\": true,\n    \"is_verified\": true,\n    \"is_staff\": false,\n    \"creation_time\": \"2022-07-26T12:56:34.883091Z\"\n  },\n  \"deploy_context\": null,\n  \"organization\": {\n    \"id\": {{organization_id}},\n    \"name\": \"{{organization}}\",\n    \"image\": null,\n    \"charged_budget\": 1072283,\n    \"virtual_budget\": 0,\n    \"build_method\": \"webhook\",\n    \"is_restricted\": false,\n    \"is_acl_enabled\": false,\n    \"is_onboarded\": true,\n    \"is_automatically_generated\": true,\n    \"has_cre\": false,\n    \"seconds_to_negative_balance\": null,\n    \"is_kaas_billing_enabled\": true,\n    \"show_hamartia\": true,\n    \"show_backup_features\": false,\n    \"show_dazzle\": true,\n    \"show_containerregistry\": true,\n    \"show_loadbalancer\": false,\n    \"total_residual_debt\": 0,\n    \"residual_debt_percentage\": 0,\n    \"apps_custom_base_domain\": null,\n    \"is_balance_limitation_enabled\": true\n  },\n  \"latest_build\": {\n    \"creation_time\": null,\n    \"end_time\": null,\n    \"status\": null,\n    \"id\": null,\n    \"git_branch\": \"\",\n    \"commit_message\": \"\"\n  },\n  \"workflows\": [],\n  \"creation_time\": \"2024-10-30T17:28:30.987487Z\",\n  \"updated_at\": \"2024-10-30T17:28:31.056870Z\",\n  \"version\": \"a3bac0ed-cb09-486f-b130-5e36151454ac\",\n  \"is_enabled\": true,\n  \"is_restricted\": false,\n  \"is_migrating\": false,\n  \"name\": \"app name\",\n  \"helm_release_name\": \"nginx2\",\n  \"description\": null,\n  \"trigger_deploy_token\": \"640ba312-8951-44dd-ae88-d37b953f41e6\",\n  \"creation_method\": \"docker_image\",\n  \"git_provider_type\": \"Gitlab\",\n  \"git_repo_url\": null,\n  \"git_branch_name\": \"main\",\n  \"git_build_workdir\": \".\",\n  \"git_build_dockerfile\": \"./Dockerfile\",\n  \"git_build_context\": \".\",\n  \"git_build_args\": [],\n  \"autodeploy_on_git_push\": true,\n  \"autogenerate_gitlabci\": false,\n  \"build_method\": \"gitlabci\",\n  \"build_webhook_secret\": \"54fd7233-546e-4068-97d6-ec4e311d3102\",\n  \"builder\": \"dockerfile\",\n  \"replicas\": 1,\n  \"image_tag\": \"1.20\",\n  \"image_repo\": \"nginx\",\n  \"command\": \"\",\n  \"args\": \"\",\n  \"envs\": [],\n  \"ephemeral_storage_limit\": \"500M\",\n  \"enable_SSL\": true,\n  \"redirect_SSL\": false,\n  \"enable_httpv2\": false,\n  \"custom_subdomain_addr\": \"nginx24\",\n  \"external_hosts\": [],\n  \"service_dns_record_has_been_set\": false,\n  \"readiness_probe_path\": \"\",\n  \"liveness_probe_path\": null,\n  \"probes_http_headers\": [],\n  \"log_aggregation_config\": {},\n  \"ingress_basic_auth_config\": {},\n  \"ingress_class_name\": null,\n  \"disk\": {},\n  \"is_disk_backup_enabled\": true,\n  \"has_cre\": false,\n  \"database_properties\": {},\n  \"helm_chart_name\": null,\n  \"helm_chart_version\": null,\n  \"helm_chart_values\": null,\n  \"post_render_starlark_script\": null,\n  \"helm_repository\": null,\n  \"trigger_goal\": \"migrate_enabled_app\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/{{app_id}}/"
+					},
+					"response": []
+				},
+				{
+					"name": "18. check internal subdomain",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-Organization",
+								"value": "{{organization}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"subdomain\": \"subdomain\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://api.hamravesh.com/api/v1/darkube/apps/check_subdomain/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://api.hamravesh.com/api/v1/users/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "notifications",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-organization",
+						"value": "{{organization}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.hamravesh.com/api/v1/notifications/all_list/?limit=50&offset=0",
+					"protocol": "https",
+					"host": [
+						"api",
+						"hamravesh",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"notifications",
+						"all_list",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "50"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": {
+			"value": "Api-key a4062c49-0bc7-44a7-8033-b3ee6dff0c75",
+			"key": "Authorization"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "organization",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "app_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "cluster_id",
+			"value": "53",
+			"type": "string"
+		},
+		{
+			"key": "namespace_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "registry_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "organization_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "namespace_name",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "account_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "account_name",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "account_email",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
