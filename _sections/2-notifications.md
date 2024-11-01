@@ -9,7 +9,7 @@ nav_order: 3
 
 **Available Methods**: `GET`
 
-## get profile information
+## get Notification list
 
 - **Method**: `GET`
 - **URL**: `/api/v1/notifications/all_list/`
@@ -49,6 +49,7 @@ print(response.text)
 {% endtabs %}
 
 Header Parameters:
+
 | Field      | Example      |
 |:-----------|:--------------------|
 |Authorization|'Api-key YOUR_API_KEY'|
